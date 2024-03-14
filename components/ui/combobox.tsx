@@ -30,13 +30,6 @@ export const Combobox = React.forwardRef<HTMLDivElement, ComboboxProps>(
     value,
     onChange }, ref) => {
     const [open, setOpen] = React.useState(false)
-    // console.log("combobox: ", options)
-    console.log("Is option an array?", Array.isArray(options))
-    // options.map((option) => {
-    //   console.log(option.label);
-    //   console.log(option.value);
-    // });
-    // console.log(...options);
 
     return (
       <Popover open={open} onOpenChange={setOpen}>
