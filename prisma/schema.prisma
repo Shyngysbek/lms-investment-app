@@ -22,14 +22,12 @@ model Course {
   category Category? @relation(fields: [categoryId], references: [id])
 
   chapters Chapter[]
-
-  purchases Purchase[]
-
   attachments Attachment[]
+  purchases Purchase[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  
+
   @@index([categoryId])
   @@fulltext([title])
 }
@@ -53,7 +51,6 @@ model Attachment {
 
   @@index([courseId])
 }
-
 
 model Chapter {
   id String @id @default(uuid())
@@ -81,7 +78,7 @@ model MuxData {
   id String @id @default(uuid())
   assetId String
   playbackId String?
-  
+
   chapterId String @unique
   chapter Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
 }
@@ -112,6 +109,7 @@ model Purchase {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt()
 
+  @@unique([userId, courseId])
   @@index([courseId])
 }
 
