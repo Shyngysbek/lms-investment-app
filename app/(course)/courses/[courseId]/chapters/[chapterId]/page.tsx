@@ -6,10 +6,13 @@ import { File } from "lucide-react";
 import { getChapter } from "@/actions/get-chapter";
 import { Banner } from "@/components/banner";
 import { Preview } from "@/components/preview";
-// import { Separator } from "@/components/ui/separator";
 
 import { VideoPlayer } from "./_components/video-player";
-// import { CourseEnrollButton } from "./_components/course-enroll-button";
+import { CourseEnrollButton } from "./_components/course-enroll-button";
+import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
+import { CourseEnrollForFreeButton } from "./_components/course-enroll-for-free-button";
+import { CourseProgressButton } from "./_components/course-progress-button";
 // import { CourseProgressButton } from "./_components/course-progress-button";
 
 const ChapterIdPage = async ({
@@ -18,10 +21,10 @@ const ChapterIdPage = async ({
   params: { courseId: string; chapterId: string }
 }) => {
   const { userId } = auth();
-  
+
   if (!userId) {
     return redirect("/");
-  } 
+  }
 
   const {
     chapter,
@@ -45,7 +48,7 @@ const ChapterIdPage = async ({
   const isLocked = !chapter.isFree && !purchase;
   const completeOnEnd = !!purchase && !userProgress?.isCompleted;
 
-  return ( 
+  return (
     <div>
       {userProgress?.isCompleted && (
         <Banner
@@ -76,7 +79,7 @@ const ChapterIdPage = async ({
             <h2 className="text-2xl font-semibold mb-2">
               {chapter.title}
             </h2>
-            {/* {purchase ? (
+            {purchase ? (
               <CourseProgressButton
                 chapterId={params.chapterId}
                 courseId={params.courseId}
@@ -84,22 +87,28 @@ const ChapterIdPage = async ({
                 isCompleted={!!userProgress?.isCompleted}
               />
             ) : (
-              <CourseEnrollButton
-                courseId={params.courseId}
-                price={course.price!}
-              />
-            )} */}
+              <>
+                <CourseEnrollForFreeButton
+                  courseId={params.courseId}
+                >
+                </CourseEnrollForFreeButton>
+                <CourseEnrollButton
+                  courseId={params.courseId}
+                  price={course.price!}
+                />
+              </>
+            )}
           </div>
-          {/* <Separator /> */}
+          <Separator />
           <div>
             <Preview value={chapter.description!} />
           </div>
           {!!attachments.length && (
             <>
-              {/* <Separator /> */}
+              <Separator />
               <div className="p-4">
                 {attachments.map((attachment) => (
-                  <a 
+                  <a
                     href={attachment.url}
                     target="_blank"
                     key={attachment.id}
@@ -117,7 +126,7 @@ const ChapterIdPage = async ({
         </div>
       </div>
     </div>
-   );
+  );
 }
- 
+
 export default ChapterIdPage;
