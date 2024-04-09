@@ -88,7 +88,7 @@ export const ChapterVideoForm = ({ initialData, courseId, chapterId }: ChapterVi
             }}
           />
           <div className="text-xs text-muted-foreground mt-4">
-            Upload this chapter's video
+            Upload this chapter&apos;s video
           </div>
         </div>
       )}
