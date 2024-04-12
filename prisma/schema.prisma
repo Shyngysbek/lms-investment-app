@@ -1,12 +1,13 @@
 datasource db {
-  provider     = "mysql"
+  provider     = "postgresql"
   url          = env("DATABASE_URL")
-  relationMode = "prisma"
+  directUrl    = env("DIRECT_URL")
+  // extensions   = [uuidOssp(map: "uuid-ossp")]
 }
 
 generator client {
   provider = "prisma-client-js"
-  previewFeatures = ["fullTextSearch", "fullTextIndex"]
+  previewFeatusres = ["fullTextSearch", "fullTextIndex", "postgresqlExtensions"]
 }
 
 model Course {
@@ -29,7 +30,7 @@ model Course {
   updatedAt DateTime @updatedAt
 
   @@index([categoryId])
-  @@fulltext([title])
+  // @@fulltext([title])
 }
 
 model Category {
